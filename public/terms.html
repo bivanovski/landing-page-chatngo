@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Terms of Use — Chat&Go</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="assets/icon-192.png" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --blue: #0396FF;
+    --blue-dark: #0270CC;
+    --purple: #AB82FF;
+    --ink: #1a2232;
+    --ink-soft: #4b5563;
+    --ink-muted: #6b7280;
+    --line: rgba(15,23,42,0.08);
+    --sans: 'Roboto','Helvetica Neue',Arial,system-ui,sans-serif;
+    --display: 'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,'Roboto',sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: #0396FF;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .bg-layer {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 0% 0%, #AB82FF 0%, transparent 60%),
+      radial-gradient(circle at 15% 10%, rgba(255,255,255,0.22) 0%, transparent 42%),
+      #0396FF;
+  }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.72);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 2px 20px rgba(11,33,74,0.05);
+  }
+  .nav-inner {
+    max-width: 860px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand img { width:32px; height:32px; border-radius:8px; }
+  .brand-name {
+    font-family: var(--display); font-weight:700; font-size:18px; letter-spacing:-0.3px;
+    background: linear-gradient(135deg,#0396FF,#8B5CF6);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .back-link {
+    font-size:14px; font-weight:500; color:var(--ink-soft); text-decoration:none;
+    display:flex; align-items:center; gap:4px;
+    padding: 7px 13px; border-radius:10px;
+    border: 1.5px solid rgba(3,150,255,0.38);
+    transition: color .2s, border-color .2s;
+  }
+  .back-link:hover { color:var(--blue); border-color:rgba(3,150,255,0.72); }
+  .back-arrow { font-size:16px; line-height:1; }
+
+  /* Content */
+  .page-wrap {
+    max-width: 860px; margin: 0 auto; padding: 48px 24px 72px;
+  }
+  .page-card {
+    background: rgba(255,255,255,0.97);
+    border-radius: 28px;
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 16px 48px rgba(11,33,74,0.12);
+    padding: 48px 52px;
+  }
+
+  .page-header { margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+  .page-header h1 {
+    font-family: var(--display); font-size: 32px; font-weight: 800;
+    letter-spacing: -0.5px; margin: 0 0 6px;
+    background: linear-gradient(135deg,#0396FF,#8B5CF6);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .page-header .meta { font-size: 13.5px; color: var(--ink-muted); }
+
+  h2 {
+    font-family: var(--display); font-size: 18px; font-weight: 700;
+    color: var(--ink); margin: 32px 0 10px; letter-spacing: -0.2px;
+  }
+
+  p { font-size: 15px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 14px; }
+  ul { padding-left: 20px; margin: 0 0 14px; }
+  ul li { font-size: 15px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 6px; }
+
+  .highlight-box {
+    background: rgba(3,150,255,0.06); border: 1px solid rgba(3,150,255,0.18);
+    border-radius: 14px; padding: 16px 20px; margin: 20px 0;
+  }
+  .highlight-box p { margin: 0; font-size: 14px; }
+
+  .warning-box {
+    background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18);
+    border-radius: 14px; padding: 16px 20px; margin: 20px 0;
+  }
+  .warning-box p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+
+  a { color: var(--blue-dark); font-weight: 500; }
+  a:hover { text-decoration: underline; }
+
+  footer.page-footer {
+    text-align:center; padding: 24px; color: rgba(255,255,255,0.75); font-size:13px;
+  }
+  footer.page-footer a { color:rgba(255,255,255,0.9); font-weight:400; text-decoration:none; }
+  footer.page-footer a:hover { color:#fff; text-decoration:underline; }
+
+  @media (max-width: 640px) {
+    .page-card { padding: 28px 20px; border-radius: 20px; }
+    .page-wrap { padding: 28px 16px 56px; }
+    .page-header h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">
+      <img src="assets/logo2.png" alt="Chat&Go logo" />
+      <span class="brand-name">Chat&amp;Go</span>
+    </a>
+    <a href="/" class="back-link"><span class="back-arrow">←</span> Back to home</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-card">
+    <div class="page-header">
+      <h1>Terms of Use</h1>
+      <div class="meta">Effective date: April 20, 2026 &nbsp;·&nbsp; Last updated: April 20, 2026</div>
+    </div>
+
+    <div class="highlight-box">
+      <p><strong>Short version:</strong> Chat&Go is in beta — use it as-is, be respectful to other users, and don't misuse the service. By signing up you agree to these terms.</p>
+    </div>
+
+    <h2>1. Acceptance</h2>
+    <p>By accessing or using Chat&Go (the "Service") you agree to be bound by these Terms of Use. If you do not agree, do not use the Service. These terms apply to the beta programme and will be updated before public launch.</p>
+
+    <h2>2. The beta programme</h2>
+    <p>The Service is provided as a <strong>pre-release beta</strong>. This means:</p>
+    <ul>
+      <li>Features may change, be removed, or behave unexpectedly at any time.</li>
+      <li>We may limit or discontinue access during the beta period without notice.</li>
+      <li>Data created during the beta may not be carried over to the public release.</li>
+      <li>Beta access is personal, non-transferable, and not for resale.</li>
+    </ul>
+
+    <h2>3. Eligibility</h2>
+    <p>You must be at least 13 years old to use Chat&Go. By signing up you confirm you meet this requirement. If you are under 18, you confirm that you have your parent or guardian's permission.</p>
+
+    <h2>4. Your account</h2>
+    <p>You are responsible for keeping your login credentials secure and for all activity that occurs under your account. Notify us immediately at <a href="mailto:beta@chatandgo.app">beta@chatandgo.app</a> if you suspect unauthorised access.</p>
+
+    <h2>5. Acceptable use</h2>
+    <p>You agree not to use the Service to:</p>
+    <ul>
+      <li>Harass, abuse, threaten, or harm any other user.</li>
+      <li>Share illegal content, hate speech, or material that infringes third-party rights.</li>
+      <li>Attempt to reverse-engineer, scrape, or exploit the Service or its infrastructure.</li>
+      <li>Impersonate Chat&Go, its team, or another user.</li>
+      <li>Use automated tools (bots, scrapers) without our written permission.</li>
+      <li>Violate any applicable local, national, or international law.</li>
+    </ul>
+    <p>We reserve the right to suspend or permanently ban accounts that violate these rules.</p>
+
+    <h2>6. Intellectual property</h2>
+    <p>All content, branding, software, and design in Chat&Go is owned by or licensed to us. You may not copy, modify, distribute, or create derivative works without our written consent.</p>
+    <p>You retain ownership of content you create (messages, uploaded files). By using the Service you grant us a limited licence to process that content solely to provide the Service to you.</p>
+
+    <h2>7. Feedback</h2>
+    <p>We actively encourage beta testers to share feedback. Any feedback, ideas, or suggestions you send us may be used to improve the product without compensation or attribution to you.</p>
+
+    <h2>8. Privacy</h2>
+    <p>Your use of the Service is also governed by our <a href="/privacy.html">Privacy Policy</a>, which is incorporated into these Terms by reference.</p>
+
+    <h2>9. Disclaimer of warranties</h2>
+    <div class="warning-box">
+      <p>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS.</p>
+    </div>
+
+    <h2>10. Limitation of liability</h2>
+    <p>To the maximum extent permitted by law, Chat&Go and its team will not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of, or inability to use, the Service — even if we have been advised of the possibility of such damages.</p>
+
+    <h2>11. Termination</h2>
+    <p>We may suspend or terminate your beta access at any time without notice if we believe you have violated these Terms. You may stop using the Service at any time by emailing us to request account deletion.</p>
+
+    <h2>12. Changes to these Terms</h2>
+    <p>We may update these Terms as the Service evolves. We will notify beta users by email of material changes. Continued use after the effective date constitutes acceptance of the updated Terms.</p>
+
+    <h2>13. Governing law</h2>
+    <p>These Terms are governed by the laws of the jurisdiction in which Chat&Go is registered. Disputes will be resolved in the courts of that jurisdiction.</p>
+
+    <h2>14. Contact</h2>
+    <p>Questions about these Terms? Email us at <a href="mailto:beta@chatandgo.app">beta@chatandgo.app</a>.</p>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <div>© 2026 Chat&amp;Go. All rights reserved. &nbsp;·&nbsp; <a href="/privacy.html">Privacy Policy</a></div>
+</footer>
+
+</body>
+</html>

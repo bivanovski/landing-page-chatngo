@@ -39,14 +39,24 @@
   body {
     font-family: var(--sans);
     color: var(--ink);
-    background:
-      radial-gradient(circle at 15% 10%, rgba(255,255,255,0.22) 0%, transparent 42%),
-      radial-gradient(circle at 85% 85%, rgba(255,255,255,0.22) 0%, transparent 45%),
-      linear-gradient(135deg, #0396FF 0%, #AB82FF 100%);
+    background: #0396FF;
     min-height: 100vh;
-    background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+  }
+
+  /* ---------- Animated background layer ---------- */
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 0% 0%, #AB82FF 0%, transparent 60%),
+      radial-gradient(circle at 15% 10%, rgba(255,255,255,0.22) 0%, transparent 42%),
+      radial-gradient(circle at 85% 85%, rgba(255,255,255,0.22) 0%, transparent 45%),
+      #0396FF;
+    will-change: background;
   }
 
   /* ---------- Nav ---------- */
@@ -75,9 +85,13 @@
   .nav-links { display: flex; gap: 28px; align-items: center; }
   .nav-links a {
     color: var(--ink-soft); text-decoration: none; font-size: 14px; font-weight: 500;
-    transition: color .2s;
+    transition: color .2s, border-color .2s, background .2s;
+    padding: 8px 14px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(3, 150, 255, 0.38);
+    background: transparent;
   }
-  .nav-links a:hover { color: var(--blue); }
+  .nav-links a:hover { color: var(--blue); border-color: rgba(3, 150, 255, 0.72); background: rgba(3, 150, 255, 0.06); }
   .nav-cta {
     background: linear-gradient(135deg, #0396FF, #0270CC);
     color: white; border: none; padding: 10px 18px; border-radius: 12px;
@@ -124,7 +138,7 @@
   .hero h1 .accent {
     display: inline-block;
     background: linear-gradient(180deg, #fff 0%, #e7f3ff 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
+    -webkit-background-clip: text; background-clip: text;
   }
   .hero p.sub {
     color: rgba(255,255,255,0.92);
@@ -441,7 +455,7 @@
   section.learning-room ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
   section.learning-room li { display:flex; align-items:center; gap:10px; color: #fff; font-size: 15px; }
   section.learning-room li .material-icons-round {
-    background: rgba(255,255,255,0.95); color: var(--purple-dark);
+    background: rgba(255,255,255,0.95); color: #0396ff;
     width: 24px; height: 24px; border-radius: 50%;
     display:flex; align-items:center; justify-content:center; font-size: 16px; font-weight: 700;
   }
@@ -635,9 +649,22 @@
   }
   footer.site-footer .f-brand { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 8px; }
   footer.site-footer .f-brand img { width: 22px; height: 22px; border-radius: 6px; }
-  footer.site-footer .f-links { display:flex; gap: 22px; justify-content:center; margin-top: 10px; flex-wrap: wrap; }
-  footer.site-footer a { color: rgba(255,255,255,0.88); text-decoration: none; }
-  footer.site-footer a:hover { color: #fff; text-decoration: underline; }
+  footer.site-footer .f-links { display:flex; gap: 14px; justify-content:center; margin-top: 14px; flex-wrap: wrap; }
+  footer.site-footer .social-link {
+    display: flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; border-radius: 12px;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.88);
+    text-decoration: none;
+    transition: background .2s, border-color .2s, transform .2s;
+  }
+  footer.site-footer .social-link:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.65);
+    transform: translateY(-2px);
+    color: #fff;
+  }
 
   /* ---------- Mobile nav ---------- */
   .nav-menu-btn {
@@ -895,15 +922,6 @@ function SignupCard({ onSuccess }) {
           <div className="check-ring"><span className="material-icons-round">check</span></div>
           <h3>You're in, {state.name.split(' ')[0]}!</h3>
           <p>We'll email you at <strong>{state.email}</strong> as soon as your build is ready.</p>
-          <div className="queue-row">
-            <span>Your place in line</span>
-            <strong>#{position.toLocaleString()}</strong>
-          </div>
-          <div className="queue-row" style={{marginTop:10}}>
-            <span>Estimated invite</span>
-            <strong>Next 7–10 days</strong>
-          </div>
-          <p style={{marginTop:18, fontSize:13}}>Move up by inviting a friend — we'll send you a referral link shortly.</p>
         </div>
       </div>
     );
@@ -1159,7 +1177,7 @@ function FAQ() {
     { q: 'Is the beta free?', a: 'Yes — the private beta is free, and early testers keep free access to the core plan forever once we launch publicly.' },
     { q: 'What data do you collect?', a: "Only what's needed to improve the app: crash reports, basic usage analytics, and messages you explicitly flag. Conversations are end-to-end encrypted and never used to train models." },
     { q: 'Which languages are supported?', a: 'We support 60+ languages at launch, including Spanish, French, German, Japanese, Mandarin, Arabic, Hindi, and more. Full list inside the app.' },
-    { q: 'Can I invite friends?', a: "Yes — once you're in, you'll get 3 invite codes to share. Inviting friends bumps you up the queue." },
+    { q: 'Can I invite friends?', a: "Yes — once you're in, you can also refer this to all of your friends that are interested." },
   ];
   return (
     <section className="faq" id="faq">
@@ -1187,10 +1205,37 @@ function Footer() {
       </div>
       <div>Say it. Translate it. Go.</div>
       <div className="f-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="mailto:beta@chatandgo.app">beta@chatandgo.app</a>
-        <a href="#">@chatandgo</a>
+        {/* Instagram */}
+        <a href="https://instagram.com/chatandgo" className="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        {/* LinkedIn */}
+        <a 
+        href="https://linkedin.com/company/chatandgo" 
+        className="social-link" 
+        aria-label="LinkedIn" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        >
+        <svg 
+        viewBox="0 0 24 24" 
+        fill="currentColor" 
+        width="18" 
+        height="18" 
+        aria-hidden="true" 
+        xmlns="http://www.w3.org/2000/svg"
+        >
+      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+    </svg>
+  </a>
+        {/* TikTok */}
+        <a href="https://tiktok.com/@chatandgo" className="social-link" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="19" height="19">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+          </svg>
+        </a>
       </div>
       <div style={{marginTop:12, opacity:.75}}>© 2026 Chat&amp;Go. All rights reserved.</div>
     </footer>
@@ -1199,10 +1244,52 @@ function Footer() {
 
 function App() {
   const [queueCount, setQueueCount] = useState(1284);
+  const bgRef = React.useRef(null);
   const onJoin = () => document.getElementById('signup')?.scrollIntoView({behavior:'smooth', block:'center'});
+
+  React.useEffect(() => {
+    const ease = (t) => t * t * (3 - 2 * t); // smoothstep
+
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const el = bgRef.current;
+      if (!el) return;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const raw = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      const p = ease(Math.max(0, Math.min(1, raw)));
+
+      // Purple radial in upper-left fades out as you scroll
+      const purpleOpacity = 1 - p;
+      // White shimmer highlights fade slightly
+      const shimmer = (0.22 - 0.10 * p).toFixed(3);
+
+      el.style.background = [
+        `radial-gradient(ellipse at 0% 0%, rgba(171,130,255,${purpleOpacity.toFixed(3)}) 0%, transparent 60%)`,
+        `radial-gradient(circle at 15% 10%, rgba(255,255,255,${shimmer}) 0%, transparent 42%)`,
+        `radial-gradient(circle at 85% 85%, rgba(255,255,255,${shimmer}) 0%, transparent 45%)`,
+        '#0396FF',
+      ].join(',');
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update(); // initial paint
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
 
   return (
     <>
+      <div className="bg-layer" ref={bgRef} />
       <Nav onJoinClick={onJoin} />
       <Hero queueCount={queueCount} setQueueCount={setQueueCount} />
       <Features />

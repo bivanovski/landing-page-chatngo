@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Privacy Policy — Chat&Go</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="assets/icon-192.png" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --blue: #0396FF;
+    --blue-dark: #0270CC;
+    --purple: #AB82FF;
+    --ink: #1a2232;
+    --ink-soft: #4b5563;
+    --ink-muted: #6b7280;
+    --line: rgba(15,23,42,0.08);
+    --sans: 'Roboto','Helvetica Neue',Arial,system-ui,sans-serif;
+    --display: 'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,'Roboto',sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: #0396FF;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .bg-layer {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 0% 0%, #AB82FF 0%, transparent 60%),
+      radial-gradient(circle at 15% 10%, rgba(255,255,255,0.22) 0%, transparent 42%),
+      #0396FF;
+  }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.72);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 2px 20px rgba(11,33,74,0.05);
+  }
+  .nav-inner {
+    max-width: 860px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand img { width:32px; height:32px; border-radius:8px; }
+  .brand-name {
+    font-family: var(--display); font-weight:700; font-size:18px; letter-spacing:-0.3px;
+    background: linear-gradient(135deg,#0396FF,#8B5CF6);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .back-link {
+    font-size:14px; font-weight:500; color:var(--ink-soft); text-decoration:none;
+    display:flex; align-items:center; gap:4px;
+    padding: 7px 13px; border-radius:10px;
+    border: 1.5px solid rgba(3,150,255,0.38);
+    transition: color .2s, border-color .2s;
+  }
+  .back-link:hover { color:var(--blue); border-color:rgba(3,150,255,0.72); }
+  .back-arrow { font-size:16px; line-height:1; }
+
+  /* Content */
+  .page-wrap {
+    max-width: 860px; margin: 0 auto; padding: 48px 24px 72px;
+  }
+  .page-card {
+    background: rgba(255,255,255,0.97);
+    border-radius: 28px;
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 16px 48px rgba(11,33,74,0.12);
+    padding: 48px 52px;
+  }
+
+  .page-header { margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+  .page-header h1 {
+    font-family: var(--display); font-size: 32px; font-weight: 800;
+    letter-spacing: -0.5px; margin: 0 0 6px;
+    background: linear-gradient(135deg,#0396FF,#8B5CF6);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .page-header .meta { font-size: 13.5px; color: var(--ink-muted); }
+
+  h2 {
+    font-family: var(--display); font-size: 18px; font-weight: 700;
+    color: var(--ink); margin: 32px 0 10px; letter-spacing: -0.2px;
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p { font-size: 15px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 14px; }
+  ul { padding-left: 20px; margin: 0 0 14px; }
+  ul li { font-size: 15px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 6px; }
+
+  .highlight-box {
+    background: rgba(3,150,255,0.06); border: 1px solid rgba(3,150,255,0.18);
+    border-radius: 14px; padding: 16px 20px; margin: 20px 0;
+  }
+  .highlight-box p { margin: 0; font-size: 14px; }
+
+  a { color: var(--blue-dark); font-weight: 500; }
+  a:hover { text-decoration: underline; }
+
+  footer.page-footer {
+    text-align:center; padding: 24px; color: rgba(255,255,255,0.75); font-size:13px;
+  }
+  footer.page-footer a { color:rgba(255,255,255,0.9); font-weight:400; text-decoration:none; }
+  footer.page-footer a:hover { color:#fff; text-decoration:underline; }
+
+  @media (max-width: 640px) {
+    .page-card { padding: 28px 20px; border-radius: 20px; }
+    .page-wrap { padding: 28px 16px 56px; }
+    .page-header h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">
+      <img src="assets/logo2.png" alt="Chat&Go logo" />
+      <span class="brand-name">Chat&amp;Go</span>
+    </a>
+    <a href="/" class="back-link"><span class="back-arrow">←</span> Back to home</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-card">
+    <div class="page-header">
+      <h1>Privacy Policy</h1>
+      <div class="meta">Effective date: April 20, 2026 &nbsp;·&nbsp; Last updated: April 20, 2026</div>
+    </div>
+
+    <div class="highlight-box">
+      <p><strong>Short version:</strong> We collect only what we need to run the beta — your name, email, and in-app usage. We never sell your data, and conversations are end-to-end encrypted.</p>
+    </div>
+
+    <h2>1. Who we are</h2>
+    <p>Chat&Go ("we", "us", "our") is the operator of the Chat&Go application and this website. If you have questions about this policy, contact us at <a href="mailto:beta@chatandgo.app">beta@chatandgo.app</a>.</p>
+
+    <h2>2. Data we collect</h2>
+    <p>When you sign up for the beta we collect:</p>
+    <ul>
+      <li><strong>Account data:</strong> your full name and email address.</li>
+      <li><strong>Preferences:</strong> native language, target language, platform choice, and stated goals.</li>
+      <li><strong>Usage analytics:</strong> feature interactions, session length, and navigation paths — used to improve the product.</li>
+      <li><strong>Crash reports:</strong> device type, OS version, and a stack trace when the app crashes — no personal content is included.</li>
+    </ul>
+    <p>We do <strong>not</strong> collect payment information during the beta.</p>
+
+    <h2>3. How we use your data</h2>
+    <ul>
+      <li>Send you a beta invite and product updates related to your sign-up.</li>
+      <li>Diagnose bugs and improve app stability.</li>
+      <li>Understand how features are used so we can improve them.</li>
+      <li>Respond to your support requests.</li>
+    </ul>
+    <p>We do not use your data for automated profiling, advertising, or sell it to any third party.</p>
+
+    <h2>4. Conversations &amp; messages</h2>
+    <p>Chat messages inside the app are <strong>end-to-end encrypted</strong>. We cannot read the content of your conversations. Messages are never used to train machine-learning models. The only message-level data we access is what you explicitly flag to us for a support request.</p>
+
+    <h2>5. Data sharing</h2>
+    <p>We share your data only with:</p>
+    <ul>
+      <li><strong>Infrastructure providers</strong> (e.g. cloud hosting, email delivery) who are bound by data-processing agreements and may not use your data for their own purposes.</li>
+      <li><strong>Legal authorities</strong> if required by a valid legal request under applicable law.</li>
+    </ul>
+
+    <h2>6. Data retention</h2>
+    <p>We keep your account data for as long as your account is active. If you request deletion we will erase your personal data within 30 days, except where retention is required by law.</p>
+
+    <h2>7. Your rights</h2>
+    <p>Depending on your location you may have the right to:</p>
+    <ul>
+      <li>Access a copy of the personal data we hold about you.</li>
+      <li>Correct inaccurate data.</li>
+      <li>Request erasure ("right to be forgotten").</li>
+      <li>Object to or restrict processing.</li>
+      <li>Data portability.</li>
+      <li>Withdraw consent at any time (this does not affect prior processing).</li>
+    </ul>
+    <p>To exercise any of these rights, email us at <a href="mailto:beta@chatandgo.app">beta@chatandgo.app</a>.</p>
+
+    <h2>8. Cookies</h2>
+    <p>This website uses only strictly necessary session cookies to keep you logged in. We do not use advertising or tracking cookies.</p>
+
+    <h2>9. Children</h2>
+    <p>Chat&Go is not directed at children under 13. We do not knowingly collect personal data from anyone under 13. If you believe we have done so, contact us and we will delete the data promptly.</p>
+
+    <h2>10. Changes to this policy</h2>
+    <p>We may update this policy as the product evolves. We will notify beta users by email if we make material changes. The "Last updated" date at the top of this page always reflects the most recent revision.</p>
+
+    <h2>11. Contact</h2>
+    <p>Questions or concerns? Reach us at <a href="mailto:beta@chatandgo.app">beta@chatandgo.app</a>. We aim to respond within 3 business days.</p>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <div>© 2026 Chat&amp;Go. All rights reserved. &nbsp;·&nbsp; <a href="/terms.html">Terms of Use</a></div>
+</footer>
+
+</body>
+</html>
