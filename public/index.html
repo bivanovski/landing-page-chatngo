@@ -843,24 +843,6 @@ function Nav({ onJoinClick }) {
   );
 }
 
-function HeroMeta({ count }) {
-  const people = [
-    { bg: 'linear-gradient(135deg,#FFD580,#FF9E6B)', i: 'A' },
-    { bg: 'linear-gradient(135deg,#7FD9FF,#0396FF)', i: 'M' },
-    { bg: 'linear-gradient(135deg,#C6B6FF,#8B5CF6)', i: 'Y' },
-    { bg: 'linear-gradient(135deg,#9EE8C1,#10b981)', i: 'K' },
-  ];
-  return (
-    <div className="hero-meta">
-      <div className="stack">
-        {people.map((p, i) => (
-          <div key={i} className="avatar" style={{ background: p.bg }}>{p.i}</div>
-        ))}
-      </div>
-      <span><strong style={{fontWeight:700}}>{count.toLocaleString()}</strong> already in the queue</span>
-    </div>
-  );
-}
 
 function SignupCard({ onSuccess }) {
   const [state, setState] = useState({
@@ -993,7 +975,7 @@ function SignupCard({ onSuccess }) {
 
       <label className="check-row">
         <input type="checkbox" checked={state.agree} onChange={e => setState(s => ({...s, agree: e.target.checked}))} />
-        <span>I agree to share crash &amp; usage data to help improve the beta, and to the <a href="#">terms</a> and <a href="#">privacy policy</a>.</span>
+        <span>I agree to share crash &amp; usage data to help improve the beta, and to the <a href="/terms.html">terms</a> and <a href="/privacy.html">privacy policy</a>.</span>
       </label>
 
       <button type="submit" className="btn-primary" disabled={!canSubmit}>
@@ -1016,7 +998,7 @@ function Hero({ queueCount, setQueueCount }) {
           <span className="accent">Translate it. Go.</span>
         </h1>
         <p className="sub">Real-time chat translation for 60+ languages. Invite your friends, pick a learning goal, and let Chat&amp;Go do the rest.</p>
-        <HeroMeta count={queueCount} />
+        
       </div>
       <div id="signup">
         <SignupCard onSuccess={(pos) => setQueueCount(pos)} />
