@@ -218,6 +218,88 @@
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
+  /* ---------- Custom Language Select ---------- */
+  .lang-select { position: relative; }
+  .lang-select-trigger {
+    cursor: pointer; user-select: none;
+    display: flex; align-items: center; gap: 8px;
+    background: #fff;
+    border: 1.5px solid rgba(15,23,42,0.1);
+    border-radius: var(--radius-sm);
+    padding: 12px 12px;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .lang-select-trigger:hover { border-color: rgba(3,150,255,0.45); }
+  .lang-select-trigger.open {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(3,150,255,0.12);
+  }
+  .lang-select-trigger .material-icons-round { color: var(--blue); font-size: 20px; flex-shrink: 0; }
+  .lang-select-val {
+    flex: 1; display: flex; align-items: center; gap: 8px;
+    font-size: 15px; color: var(--ink); font-family: var(--sans); min-width: 0;
+    overflow: hidden;
+  }
+  .lang-flag { font-size: 18px; line-height: 1; flex-shrink: 0; }
+  .lang-val-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lang-chevron { color: var(--ink-muted); font-size: 20px !important; flex-shrink: 0; transition: transform .2s; }
+  .lang-select-trigger.open .lang-chevron { transform: rotate(180deg); }
+
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid rgba(3,150,255,0.2);
+    box-shadow: 0 16px 48px rgba(11,33,74,0.18), 0 0 0 1px rgba(3,150,255,0.06);
+    z-index: 300;
+    overflow: hidden;
+    animation: dropIn .14s ease;
+  }
+  @keyframes dropIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+
+  .lang-search-wrap {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(135deg, rgba(3,150,255,0.04), rgba(171,130,255,0.04));
+  }
+  .lang-search-wrap > .material-icons-round { font-size: 17px !important; color: var(--ink-muted); flex-shrink: 0; }
+  .lang-search {
+    flex: 1; border: 0; outline: 0;
+    font-size: 13.5px; font-family: var(--sans); color: var(--ink); background: transparent;
+  }
+  .lang-search::placeholder { color: var(--ink-muted); }
+  .lang-search-clear { font-size: 15px !important; color: var(--ink-muted); cursor: pointer; flex-shrink: 0; }
+
+  .lang-list { max-height: 230px; overflow-y: auto; }
+  .lang-list::-webkit-scrollbar { width: 4px; }
+  .lang-list::-webkit-scrollbar-track { background: transparent; }
+  .lang-list::-webkit-scrollbar-thumb { background: rgba(3,150,255,0.28); border-radius: 4px; }
+
+  .lang-option {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 14px; cursor: pointer;
+    font-size: 13.5px; color: var(--ink);
+    transition: background .12s;
+  }
+  .lang-option:hover { background: rgba(3,150,255,0.06); }
+  .lang-option.selected {
+    background: linear-gradient(135deg, rgba(3,150,255,0.1), rgba(171,130,255,0.07));
+    color: var(--blue-dark); font-weight: 500;
+  }
+  .lang-option .lang-flag { font-size: 16px; }
+  .lang-option-name { flex: 1; }
+  .lang-check { font-size: 15px !important; color: var(--blue); margin-left: auto; }
+  .lang-no-results { padding: 14px; color: var(--ink-muted); font-size: 13px; text-align: center; }
+
+  @media (max-width: 640px) {
+    .lang-select { display: none; }
+    .lang-select-native { display: block !important; }
+  }
+  .lang-select-native { display: none; }
+
   .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
     display: inline-flex; align-items: center; gap: 6px;
@@ -766,18 +848,62 @@
 const { useState } = React;
 
 const LANGUAGES = [
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'es', name: 'Spanish', flag: '🇪🇸' },
-  { code: 'fr', name: 'French', flag: '🇫🇷' },
-  { code: 'de', name: 'German', flag: '🇩🇪' },
-  { code: 'it', name: 'Italian', flag: '🇮🇹' },
-  { code: 'pt', name: 'Portuguese', flag: '🇵🇹' },
-  { code: 'ja', name: 'Japanese', flag: '🇯🇵' },
-  { code: 'ko', name: 'Korean', flag: '🇰🇷' },
-  { code: 'zh', name: 'Mandarin', flag: '🇨🇳' },
-  { code: 'ar', name: 'Arabic', flag: '🇸🇦' },
-  { code: 'hi', name: 'Hindi', flag: '🇮🇳' },
-  { code: 'ru', name: 'Russian', flag: '🇷🇺' },
+  { code: 'af',      name: 'Afrikaans',             flag: '🇿🇦' },
+  { code: 'ar',      name: 'Arabic',                flag: '🇸🇦' },
+  { code: 'bn',      name: 'Bengali',               flag: '🇧🇩' },
+  { code: 'bs',      name: 'Bosnian',               flag: '🇧🇦' },
+  { code: 'bg',      name: 'Bulgarian',             flag: '🇧🇬' },
+  { code: 'yue',     name: 'Cantonese',             flag: '🇭🇰' },
+  { code: 'ca',      name: 'Catalan',               flag: '🇪🇸' },
+  { code: 'zh-Hans', name: 'Chinese',  flag: '🇨🇳' },
+  { code: 'hr',      name: 'Croatian',              flag: '🇭🇷' },
+  { code: 'cs',      name: 'Czech',                 flag: '🇨🇿' },
+  { code: 'da',      name: 'Danish',                flag: '🇩🇰' },
+  { code: 'nl',      name: 'Dutch',                 flag: '🇳🇱' },
+  { code: 'en',      name: 'English',               flag: '🇬🇧' },
+  { code: 'et',      name: 'Estonian',              flag: '🇪🇪' },
+  { code: 'fj',      name: 'Fijian',                flag: '🇫🇯' },
+  { code: 'fil',     name: 'Filipino',              flag: '🇵🇭' },
+  { code: 'fi',      name: 'Finnish',               flag: '🇫🇮' },
+  { code: 'fr',      name: 'French',                flag: '🇫🇷' },
+  { code: 'de',      name: 'German',                flag: '🇩🇪' },
+  { code: 'el',      name: 'Greek',                 flag: '🇬🇷' },
+  { code: 'gu',      name: 'Gujarati',              flag: '🇮🇳' },
+  { code: 'ht',      name: 'Haitian Creole',        flag: '🇭🇹' },
+  { code: 'he',      name: 'Hebrew',                flag: '🇮🇱' },
+  { code: 'hi',      name: 'Hindi',                 flag: '🇮🇳' },
+  { code: 'hu',      name: 'Hungarian',             flag: '🇭🇺' },
+  { code: 'is',      name: 'Icelandic',             flag: '🇮🇸' },
+  { code: 'id',      name: 'Indonesian',            flag: '🇮🇩' },
+  { code: 'it',      name: 'Italian',               flag: '🇮🇹' },
+  { code: 'ja',      name: 'Japanese',              flag: '🇯🇵' },
+  { code: 'ko',      name: 'Korean',                flag: '🇰🇷' },
+  { code: 'lv',      name: 'Latvian',               flag: '🇱🇻' },
+  { code: 'lt',      name: 'Lithuanian',            flag: '🇱🇹' },
+  { code: 'ms',      name: 'Malay',                 flag: '🇲🇾' },
+  { code: 'ml',      name: 'Malayalam',             flag: '🇮🇳' },
+  { code: 'mt',      name: 'Maltese',               flag: '🇲🇹' },
+  { code: 'nb',      name: 'Norwegian',             flag: '🇳🇴' },
+  { code: 'fa',      name: 'Persian',               flag: '🇮🇷' },
+  { code: 'pl',      name: 'Polish',                flag: '🇵🇱' },
+  { code: 'pt',      name: 'Portuguese',            flag: '🇵🇹' },
+  { code: 'pa',      name: 'Punjabi',               flag: '🇮🇳' },
+  { code: 'ro',      name: 'Romanian',              flag: '🇷🇴' },
+  { code: 'ru',      name: 'Russian',               flag: '🇷🇺' },
+  { code: 'sr-Latn', name: 'Serbian',       flag: '🇷🇸' },
+  { code: 'sk',      name: 'Slovak',                flag: '🇸🇰' },
+  { code: 'sl',      name: 'Slovenian',             flag: '🇸🇮' },
+  { code: 'es',      name: 'Spanish',               flag: '🇪🇸' },
+  { code: 'sv',      name: 'Swedish',               flag: '🇸🇪' },
+  { code: 'sw',      name: 'Swahili',               flag: '🇰🇪' },
+  { code: 'ta',      name: 'Tamil',                 flag: '🇮🇳' },
+  { code: 'te',      name: 'Telugu',                flag: '🇮🇳' },
+  { code: 'th',      name: 'Thai',                  flag: '🇹🇭' },
+  { code: 'tr',      name: 'Turkish',               flag: '🇹🇷' },
+  { code: 'uk',      name: 'Ukrainian',             flag: '🇺🇦' },
+  { code: 'ur',      name: 'Urdu',                  flag: '🇵🇰' },
+  { code: 'vi',      name: 'Vietnamese',            flag: '🇻🇳' },
+  { code: 'cy',      name: 'Welsh',                 flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿' },
 ];
 
 const PLATFORMS = [
@@ -792,6 +918,69 @@ const GOALS = [
   { id: 'friends', label: 'Chat with friends', icon: 'group' },
   { id: 'work', label: 'Work abroad', icon: 'work' },
 ];
+
+function LanguageSelect({ value, onChange, icon }) {
+  const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = React.useState('');
+  const ref = React.useRef(null);
+  const searchRef = React.useRef(null);
+
+  const selected = LANGUAGES.find(l => l.code === value) || LANGUAGES[0];
+  const q = search.trim().toLowerCase();
+  const filtered = q ? LANGUAGES.filter(l => l.name.toLowerCase().includes(q)) : LANGUAGES;
+
+  React.useEffect(() => {
+    if (!open) return;
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) { setOpen(false); setSearch(''); }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [open]);
+
+  React.useEffect(() => {
+    if (open && searchRef.current) searchRef.current.focus();
+  }, [open]);
+
+  const select = (code) => { onChange(code); setOpen(false); setSearch(''); };
+
+  return (
+    <div className="lang-select" ref={ref}>
+      <div className={'lang-select-trigger' + (open ? ' open' : '')} onClick={() => setOpen(o => !o)}>
+        <span className="material-icons-round">{icon}</span>
+        <span className="lang-select-val">
+          <span className="lang-flag">{selected.flag}</span>
+          <span className="lang-val-name">{selected.name}</span>
+        </span>
+        <span className="material-icons-round lang-chevron">expand_more</span>
+      </div>
+      {open && (
+        <div className="lang-dropdown">
+          <div className="lang-search-wrap">
+            <span className="material-icons-round">search</span>
+            <input ref={searchRef} className="lang-search" placeholder="Search language…"
+              value={search} onChange={e => setSearch(e.target.value)} />
+            {search && (
+              <span className="material-icons-round lang-search-clear" onClick={() => setSearch('')}>close</span>
+            )}
+          </div>
+          <div className="lang-list">
+            {filtered.length === 0
+              ? <div className="lang-no-results">No languages found</div>
+              : filtered.map(l => (
+                <div key={l.code} className={'lang-option' + (l.code === value ? ' selected' : '')} onClick={() => select(l.code)}>
+                  <span className="lang-flag">{l.flag}</span>
+                  <span className="lang-option-name">{l.name}</span>
+                  {l.code === value && <span className="material-icons-round lang-check">check</span>}
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Brand() {
   return (
@@ -942,7 +1131,8 @@ function SignupCard({ onSuccess }) {
       <div className="grid-2">
         <div className="field">
           <label>You speak</label>
-          <div className="input-wrap has-select">
+          <LanguageSelect value={state.nativeLang} onChange={code => setState(s => ({...s, nativeLang: code}))} icon="record_voice_over" />
+          <div className="input-wrap has-select lang-select-native">
             <span className="material-icons-round">record_voice_over</span>
             <select value={state.nativeLang} onChange={e => setState(s => ({...s, nativeLang: e.target.value}))}>
               {LANGUAGES.map(l => <option key={l.code} value={l.code}>{l.flag} {l.name}</option>)}
@@ -951,7 +1141,8 @@ function SignupCard({ onSuccess }) {
         </div>
         <div className="field">
           <label>You want to learn</label>
-          <div className="input-wrap has-select">
+          <LanguageSelect value={state.learnLang} onChange={code => setState(s => ({...s, learnLang: code}))} icon="translate" />
+          <div className="input-wrap has-select lang-select-native">
             <span className="material-icons-round">translate</span>
             <select value={state.learnLang} onChange={e => setState(s => ({...s, learnLang: e.target.value}))}>
               {LANGUAGES.map(l => <option key={l.code} value={l.code}>{l.flag} {l.name}</option>)}
@@ -1011,7 +1202,7 @@ function Features() {
   const items = [
     { i: 'i-1', icon: 'translate', t: 'Real-time translation', d: '60+ languages, translated inline as you chat. Both sides see the message in their own language, instantly.' },
     { i: 'i-2', icon: 'school', t: 'Learn as you chat', d: 'Tap any phrase for grammar hints, pronunciation, and vocabulary cards that sync with your Learning Room.' },
-    { i: 'i-3', icon: 'groups', t: 'Learning Rooms', d: 'Create group rooms with friends, set a target language, and track progress together with weekly insights.' },
+    { i: 'i-3', icon: 'groups', t: 'Learning Rooms', d: 'Create your own learning sessions with Chatty, our very own AI Tutor, that will help come over any obstacle that might arise during your learning journey.' },
   ];
   return (
     <section className="features" id="features">
@@ -1155,7 +1346,7 @@ function LearningRoom() {
 function FAQ() {
   const [open, setOpen] = useState(0);
   const items = [
-    { q: 'How do I get access to the beta?', a: "Fill out the form above. We review signups weekly and send invites in batches of ~500. You'll receive an email with a TestFlight, Play Store, or web link based on your platform choice." },
+    { q: 'How do I get access to the beta?', a: "Fill out the form above. We review signups weekly and send invites. You'll receive an email with a link to test the beta." },
     { q: 'Is the beta free?', a: 'Yes — the private beta is free, and early testers keep free access to the core plan forever once we launch publicly.' },
     { q: 'What data do you collect?', a: "Only what's needed to improve the app: crash reports, basic usage analytics, and messages you explicitly flag. Conversations are end-to-end encrypted and never used to train models." },
     { q: 'Which languages are supported?', a: 'We support 60+ languages at launch, including Spanish, French, German, Japanese, Mandarin, Arabic, Hindi, and more. Full list inside the app.' },
@@ -1188,14 +1379,14 @@ function Footer() {
       <div>Say it. Translate it. Go.</div>
       <div className="f-links">
         {/* Instagram */}
-        <a href="https://instagram.com/chatandgo" className="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/chatngoapp?igsh=Z2QxamFnOTBoZnZl" className="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
           </svg>
         </a>
         {/* LinkedIn */}
         <a 
-        href="https://linkedin.com/company/chatandgo" 
+        href="https://www.linkedin.com/company/chat-and-go" 
         className="social-link" 
         aria-label="LinkedIn" 
         target="_blank" 
