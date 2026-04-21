@@ -213,7 +213,7 @@
   .input-wrap.has-select::after {
     content: 'expand_more';
     font-family: 'Material Icons Round';
-    position: absolute; right: 10px; color: var(--ink-muted); pointer-events: none;
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: var(--ink-muted); pointer-events: none;
   }
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -575,7 +575,7 @@
   }
   .lrchat-logo .material-icons-round { font-size: 16px; }
   .lrchat-titles { flex: 1; min-width: 0; }
-  .lrchat-lang { font-family: var(--display); font-weight: 700; font-size: 14px; color: var(--ink); line-height: 1.1; }
+  .lrchat-lang { font-family: var(--display); font-weight: 700; font-size: 14px; color: var(--ink); line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .lrchat-online {
     font-size: 10.5px; color: #10b981; font-weight: 600;
     display: flex; align-items: center; gap: 4px; margin-top: 2px;
@@ -811,7 +811,10 @@
     section.learning-room { padding: 24px 16px; margin-top: 24px; }
     section.faq { padding: 24px 16px 10px; margin-top: 24px; }
     .section-sub { font-size: 15px; margin-bottom: 24px; }
-    .phone { width: 240px; height: 480px; }
+    .phone { width: 260px; height: 520px; }
+    .lrchat-dots { display: none; }
+    .lrchat-btn { width: 26px; height: 26px; }
+    .lrchat-btn .material-icons-round { font-size: 14px; }
   }
   @media (max-width: 480px) {
     .hero { padding: 28px 14px 20px; }
